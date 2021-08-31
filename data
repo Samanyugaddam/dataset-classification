@@ -1,0 +1,84 @@
+import sys
+print('python:{}'.format(sys.version))
+import scipy
+print('scipy:{}'.format(scipy.__version__))
+impot numpy 
+print('numpy:{}'.format(numpy.__version__))
+import matplotlib
+print('matplotlib:{}'.format(matplotlib.__version__))
+import pandas 
+print('pandas:{}'.format(pandas.__version__))
+import sklearn
+print('sklearn:{}'.format(sklearn.__version__))
+
+import pandas 
+from pandas.plotting import scatter_matrix
+from matplotlib import pyplot 
+from sklearn.moder_selection import train_test_split
+from sklearn.moder_selection import cross_val_split
+from sklearn.moder_selection import stratifiedKFold
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.linear_model import LogisticRegression
+from sklearnn.tree import DecisionTreeClassifier
+from sklearn.neighbours import KNeighbourClassifier
+from sklearn.discrimanant_analysis import LinearDiscriminantAnalysis
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+from sklearn import moel_selection
+from sklearn.ensemble import VotingClassifier
+
+url
+names
+dataset=read_csv(url,names=names)
+
+print(dataset.shape)
+
+print(dataset.head(20))
+
+print(dataset.describe())
+
+print(dataset.groupby('class').size())
+
+dataset.plot(kind='box',subplots=true,layout=(2,2),sharex=false,sharey=false)
+pyplot.show()
+
+dataset.hist()
+pyplot.show()
+
+scatter_matrix(dataset)
+printplot.show()
+
+array=dataset.values
+x=array[:,0:4]
+y=array[:,4]
+x_train,x_valudation,y_train,y_validation=train_test_split(x,y,test_size=0.2,random_state=1)
+
+models=[]
+models.append(('LR',logisticregression(solver='liblinear',multi_class='ovr')))
+models.append(('LDA',lineardiscriminantanalysis()))
+models.append(('KNN',kneighboursclassfier()))
+models.append(('NB',gaussianNB()))
+models.append(('SVM',SVC(gamma='auto')))
+
+results=[]
+names=[]
+for name,model in models:
+kfold=stratifiedKFold(n_splits=10,random_state=1)
+cv_results=cross_val_score(model,x_train,y_train,cv=kfold,scoring='accuracy')
+results.append(cv_results)
+names.append(name)
+print('%s: %f (%f)'% (name,cv_results.mean(),cv_results.std())))
+pyplot.boxplot(results,labels=names)
+pyplot.title('algorithm comparision')
+pyplot.show()
+
+model=SVC(gamma='auto')
+model.fit(X_train,Y_train)
+predictions=model.predict(X_validation)
+
+print(accuracy_score(Y_validation,predictions))
+print(confusion_score(Y_validation,predictions))
+print()classification_report(Y_validation,predictions)
+
